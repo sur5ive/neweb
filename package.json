@@ -1,0 +1,21 @@
+{
+  "name": "neweb",
+  "private": true,
+  "scripts": {
+    "start": "meteor run"
+  },
+  "dependencies": {
+    "babel-runtime": "^6.18.0",
+    "desandro-get-style-property": "^1.0.4",
+    "desandro-matches-selector": "^2.0.1",
+    "doc-ready": "^1.0.4",
+    "eventie": "^1.0.6",
+    "fizzy-ui-utils": "^2.0.3",
+    "get-size": "^2.0.2",
+    "jquery": "^3.1.1",
+    "masonry-layout": "^4.1.1",
+    "meteor-node-stubs": "~0.2.0",
+    "outlayer": "^2.1.0",
+    "wolfy87-eventemitter": "^5.1.0"
+  }
+}
