@@ -1,5 +1,6 @@
 Template.index.rendered = function () {
   
+    $('head').append('<script type="text/javascript" src="js/vendor.js"></script>');
 
     /*------Resize End Event -- Debounces resize of browser event-----------*/
     //http://stackoverflow.com/questions/5489946/jquery-how-to-wait-for-the-end-of-resize-event-and-only-then-perform-an-ac
