@@ -1,7 +1,7 @@
 Template.index.rendered = function () {
   
     $('head').append('<script type="text/javascript" src="js/vendor.js"></script>');
-
+    
     /*------Resize End Event -- Debounces resize of browser event-----------*/
     //http://stackoverflow.com/questions/5489946/jquery-how-to-wait-for-the-end-of-resize-event-and-only-then-perform-an-ac
     //https://learn.jquery.com/events/introduction-to-custom-events/
@@ -99,6 +99,79 @@ Template.index.rendered = function () {
             skin : 'noskin',
             skinsPath : '/skins/'
         });
+    }
+
+    /* -------------- achivement -----------*/
+    
+    var heightachivement = $('.achivementwrapper .achievement li .figcontentachv').innerHeight();
+    $('.achivementwrapper .achievement li .fig').css('height' ,heightachivement );
+    $('.achivementwrapper .achievement li .fig').css('line-height' ,heightachivement+ 'px');
+
+    /*-------  award accordion -------*/
+
+    $('.yr_accordion a').on('click',function (event) {
+        event.preventDefault();
+        var target = $(this).attr('href');
+        if (target !== '#') {
+            $('.yr_accordion li').removeClass('active');
+            $(this).parent().addClass('active');
+            $('.information-wrap .tab-pane').hide();
+            $(target).show();
+        }
+    });
+
+    /*-------------- contact form -----------*/
+
+    $('.formcontact').submit(function(event){
+      event.preventDefault();
+      var formdata = $('.formcontact').serializeArray();
+      $.ajax({
+        url: 'php/contact.php',
+        type: 'POST',
+        async: true,
+        data: formdata,     
+      }).done(function(data) {
+            $('.formcontact .form-message').removeClass('hidden').html(data);
+            $('.formcontact .btn').attr('disabled', 'disabled');
+            $('.formcontact' ).each(function () {
+                this.reset(); //CLEARS THE FORM AFTER SUBMISSION
+            });
+        });
+    });
+
+    /*--------------- Google Maps -- Contact Page  ------------------*/
+
+    var map;
+
+    function initMap() {
+      // Create a map object and specify the DOM element for display.
+      var _location = new google.maps.LatLng(59.411641, 24.667706);
+      map = new google.maps.Map(document.getElementById('map-section'), {
+        scrollwheel: false,
+        panControl: false,
+        zoomControl: false,
+        disableDefaultUI: true,
+        styles: [
+              {'stylers': [{ 'hue': '#dd0d0d' }, { saturation: -100 }]},
+              {
+                'featureType': 'road.arterial',
+                'elementType': 'labels',
+                'stylers': [{'visibility': 'off'}]
+              },
+              {
+                'featureType': 'poi.business',
+                'elementType': 'geometry',
+                'stylers': [{'lightness': 100},
+                      {'visibility': 'simplified'}]
+              }
+        ],
+        zoom: 16,
+        center: _location
+      });
+    }
+
+    if($('#map-section'). length){
+      initMap();
     }
 
 };
