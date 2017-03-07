@@ -85,12 +85,6 @@ Template.index.rendered = function () {
       lastScrollTop = st;
     });
 
-    /* ----------- menu dropdown ------------*/
-
-    $('.menu-bar li').on('click', function () {
-        $(this).find('.sub-menu').toggleClass('addSubMenu');
-    });
-
     /* ------------- Hero Banner  -------------*/
 
     if($('#layerSlider').length){
@@ -101,26 +95,200 @@ Template.index.rendered = function () {
         });
     }
 
-    /* -------------- achivement -----------*/
+    /* ---------- Team ------------*/
+
+    if($('.slideHeroes').length){
+        $('.slideHeroes').slick({
+          infinite:true,
+          slidesToShow: 3,
+          slidesToScroll:1,
+          dots:false,
+          centerMode: true,
+          centerPadding: '0px',
+          prevArrow: '.prev-player',
+          nextArrow: '.next-player',
+          responsive: [
+              {
+                breakpoint: 2000,
+                settings: {
+                  slidesToShow: 3,
+                  slidesToScroll: 1
+                }
+              },
+              {
+                breakpoint: 992,
+                settings: {
+                  slidesToShow: 2,
+                  slidesToScroll:1,
+                  centerMode: false,
+                  centerPadding: '0px'
+                }
+              },
+              {
+                breakpoint:480,
+                settings: {
+                  slidesToShow: 1,
+                  slidesToScroll:1,
+                  centerMode: false,
+                  centerPadding: '0px',
+                }
+              }
+          ]
+        });
+    }
+
+    /* ------------- News  -------------*/
+
+    var slickOptions = {
+        infinite: true,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        prevArrow: '.club_prev',
+        nextArrow: '.club_next',
+        responsive: [
+            {
+                breakpoint: 992,
+                settings: {
+                slidesToShow: 3,
+                slidesToScroll:1,
+                infinite:true
+                }
+            },
+            {
+                breakpoint:600,
+                settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+                },  
+            },
+            {
+                breakpoint:480,
+                settings: {
+                slidesToShow: 1,
+                slidesToScroll: 1
+                },
+            }
+        ]
+    };
+
+    if (('#club_news').length){
+        $('#club_news').slick(slickOptions);
+    }
     
-    var heightachivement = $('.achivementwrapper .achievement li .figcontentachv').innerHeight();
-    $('.achivementwrapper .achievement li .fig').css('height' ,heightachivement );
-    $('.achivementwrapper .achievement li .fig').css('line-height' ,heightachivement+ 'px');
-
-    /*-------  award accordion -------*/
-
-    $('.yr_accordion a').on('click',function (event) {
-        event.preventDefault();
-        var target = $(this).attr('href');
-        if (target !== '#') {
-            $('.yr_accordion li').removeClass('active');
-            $(this).parent().addClass('active');
-            $('.information-wrap .tab-pane').hide();
-            $(target).show();
-        }
+    $('#world_news_button').on('shown.bs.tab', function () {
+        $('#club_news').slick('unslick');
+        $('#world_news').slick(slickOptions);
     });
 
-    /*-------------- contact form -----------*/
+    $('#club_news_button').on('shown.bs.tab', function () {
+        $('#world_news').slick('unslick');
+        $('#club_news').slick(slickOptions);
+    });
+
+
+    /* ---------------- Image Gallery ---------*/
+
+    var $containergallery = $('#galleryWrapper');
+    
+    if($containergallery.length){
+
+        var $boxes = $('.item');
+        var masonaryOptionsGallery = {
+                                isAnimated: true,
+                                isFitWidth: true
+                            };
+        $boxes.hide();
+
+        $containergallery.imagesLoaded( function() {
+            $boxes.fadeIn();
+    
+            $containergallery.masonry(masonaryOptionsGallery);    
+        });
+    
+        $(window).on('sccResizeEnd', function () {
+            $containergallery.masonry(masonaryOptionsGallery);
+        });
+
+        $containergallery.one( 'layoutComplete', function() {
+            $('#galleryLoader').hide();
+        });
+    }
+
+    /* ------------ Masonary (Gallery grid) --------------*/
+
+    var $grid = $('.grid');
+    if($grid.length){
+        var masonaryOptions = {
+          gutter: '.gutter',
+          isFitWidth: true
+        };
+
+        $grid.imagesLoaded(function () {
+            $grid.masonry(masonaryOptions);
+        });
+
+        $(window).on('sccResizeEnd', function () {
+            $grid.masonry(masonaryOptions);
+        });
+    }
+
+    /* ---------- Awards ------------*/
+
+    if($('.awards-wrap').length){
+        $('.awards-wrap').slick({
+            infinite:true,
+            slidesToShow: 4,
+            slidesToScroll:1,
+            dots:false,
+            prevArrow: '.awards_prev',
+            nextArrow: '.awards_next',
+            responsive: [
+                {
+                    breakpoint: 2000,
+                    settings: {
+                      slidesToShow: 4,
+                      slidesToScroll: 1,
+                    }
+                },
+                {
+                    breakpoint: 1200,
+                    settings: {
+                      slidesToShow: 3,
+                      slidesToScroll:1,
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                      slidesToShow: 2,
+                      slidesToScroll:1,
+                    }
+                },
+                {
+                    breakpoint:480,
+                    settings: {
+                      slidesToShow:1 ,
+                      slidesToScroll:1,
+                    }
+                }
+            ]
+        });
+    }
+
+    /* ---------- Social Media ------------*/
+
+    if($('.socialinfo').length){
+        $('.socialinfo').slick({
+            infinite:true,
+            slidesToShow: 1,
+            slidesToScroll:1,
+            autoplay:true,
+            arrows:false,
+            dots:false,
+        });
+    }
+    
+    /*-------------- Contact form -----------*/
 
     $('.formcontact').submit(function(event){
       event.preventDefault();
@@ -151,20 +319,7 @@ Template.index.rendered = function () {
         panControl: false,
         zoomControl: false,
         disableDefaultUI: true,
-        styles: [
-              {'stylers': [{ 'hue': '#dd0d0d' }, { saturation: -100 }]},
-              {
-                'featureType': 'road.arterial',
-                'elementType': 'labels',
-                'stylers': [{'visibility': 'off'}]
-              },
-              {
-                'featureType': 'poi.business',
-                'elementType': 'geometry',
-                'stylers': [{'lightness': 100},
-                      {'visibility': 'simplified'}]
-              }
-        ],
+        styles: [],
         zoom: 16,
         center: _location
       });
@@ -173,5 +328,7 @@ Template.index.rendered = function () {
     if($('#map-section'). length){
       initMap();
     }
+
+    /*----------------------------------------------------------------*/
 
 };
