@@ -1,7 +1,7 @@
 Template.index.rendered = function () {
   
     $('head').append('<script type="text/javascript" src="js/vendor.js"></script>');
-    
+
     /*------Resize End Event -- Debounces resize of browser event-----------*/
     //http://stackoverflow.com/questions/5489946/jquery-how-to-wait-for-the-end-of-resize-event-and-only-then-perform-an-ac
     //https://learn.jquery.com/events/introduction-to-custom-events/
@@ -95,6 +95,54 @@ Template.index.rendered = function () {
         });
     }
 
+    /*--------------- Latest Result - Animation on scroll (Waypoint) ------------------*/
+
+    function wayPoint() {
+        if ($windowWidth >= 1200){
+            $('.latestResult').waypoint(function() {
+                setTimeout(function() {
+                    $('.figure').addClass('addfigure');
+                }, 100);
+                setTimeout(function() {
+                    $('.team-logo').css('opacity' , '1');
+                }, 1000);
+                setTimeout(function() {
+                    $('.figure').addClass('animatefig-before');
+                }, 1000);
+                setTimeout(function() {
+                    $('.content').css('opacity' , '1');
+                }, 2000);
+
+            }, { offset: '70%' });
+        }   
+
+        $('.achivementwrapper').waypoint(function() {
+            setTimeout(function() {
+                $('.achievement .fig img').addClass('figachvadd');
+            }, 600);
+
+        }, { offset: '70%' });
+
+    }
+    
+    if ($windowWidth >= 992) { wayPoint(); }
+
+
+    /*--------------- Next Match Countdown Timer ------------------*/
+
+    if($('.match_timing').length){
+        $('.match_timing').countdown('2017/04/31', function(event) {
+            $(this).html(
+                event.strftime('<ul class="counter-wrap ">' + 
+                                '<li ><span>%D</span>days</li>' + 
+                                '<li ><span>%H</span>hours</li>' + 
+                                '<li> <span>%M</span>minutes</li>' + 
+                                '<li ><span>%S</span>seconds</li>' + 
+                              '</ul>')
+            );
+        });
+    }
+
     /* ---------- Team ------------*/
 
     if($('.slideHeroes').length){
@@ -136,54 +184,6 @@ Template.index.rendered = function () {
           ]
         });
     }
-
-    /* ------------- News  -------------*/
-
-    var slickOptions = {
-        infinite: true,
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        prevArrow: '.club_prev',
-        nextArrow: '.club_next',
-        responsive: [
-            {
-                breakpoint: 992,
-                settings: {
-                slidesToShow: 3,
-                slidesToScroll:1,
-                infinite:true
-                }
-            },
-            {
-                breakpoint:600,
-                settings: {
-                slidesToShow: 2,
-                slidesToScroll: 1
-                },  
-            },
-            {
-                breakpoint:480,
-                settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1
-                },
-            }
-        ]
-    };
-
-    if (('#club_news').length){
-        $('#club_news').slick(slickOptions);
-    }
-    
-    $('#world_news_button').on('shown.bs.tab', function () {
-        $('#club_news').slick('unslick');
-        $('#world_news').slick(slickOptions);
-    });
-
-    $('#club_news_button').on('shown.bs.tab', function () {
-        $('#world_news').slick('unslick');
-        $('#club_news').slick(slickOptions);
-    });
 
 
     /* ---------------- Image Gallery ---------*/

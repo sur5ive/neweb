@@ -7523,7 +7523,7 @@ h6 {
 /* -------------- latest result section -----------*/
 .latestResult {
   padding: 100px 0;
-  background: url("images/background/latestnews.jpg") no-repeat;
+  background: url("images/background/latestnews_rain.jpg") no-repeat;
   background-size: cover;
   background-position: center; }
   .latestResult h2 {
@@ -7563,7 +7563,7 @@ h6 {
       @media (min-width: 1200px) {
         .latestResult .result-details {
           float: left;
-          width: 41.6666666667%; } }
+          width: 40%; } }
       .latestResult .result-details .figure:after {
         -webkit-transform: scaleX(-1);
             -ms-transform: scaleX(-1);
@@ -7584,7 +7584,7 @@ h6 {
       @media (min-width: 1200px) {
         .latestResult .result-count {
           float: left;
-          width: 16.6666666667%; } }
+          width: 20%; } }
     .latestResult .result .figure {
       position: relative;
       min-height: 1px;
