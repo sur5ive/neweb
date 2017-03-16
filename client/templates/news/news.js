@@ -16,8 +16,8 @@ Template.index.helpers({
     },
 });
 
-Template.news.rendered = function () {
-        /* ------------- News  -------------*/
+Template.newsItem.rendered = function () {
+    /* ------------- News  -------------*/
 
     var slickOptions = {
         infinite: true,
@@ -56,14 +56,4 @@ Template.news.rendered = function () {
         console.log(slickOptions);
         $('#club_news').slick(slickOptions);
     }
-    
-    $('#world_news_button').on('shown.bs.tab', function () {
-        $('#club_news').slick('unslick');
-        $('#world_news').slick(slickOptions);
-    });
-
-    $('#club_news_button').on('shown.bs.tab', function () {
-        $('#world_news').slick('unslick');
-        $('#club_news').slick(slickOptions);
-    });
 }
