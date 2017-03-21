@@ -8182,7 +8182,8 @@ section {
       transition: all 0.4s ease-in-out; }
   .news_display_container .content-01 {
     background: #000 url(images/background/background-news.jpg);
-    padding: 20px 15px; }
+    padding: 20px 15px;
+    height: 220px; }
     .news_display_container .content-01 .describtion {
       padding: 10px 0; }
   .news_display_container .news_date {

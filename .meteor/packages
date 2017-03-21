@@ -25,3 +25,5 @@ risul:slick
 jquery
 isotope:isotope
 mrt:jquery-masonry
+momentjs:moment
+rzymek:moment-locale-et

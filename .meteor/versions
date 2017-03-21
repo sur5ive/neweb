@@ -54,6 +54,7 @@ mobile-experience@1.0.4
 mobile-status-bar@1.0.14
 modules@0.7.9
 modules-runtime@0.7.9
+momentjs:moment@2.18.0
 mongo@1.1.16
 mongo-id@1.0.6
 mrt:jquery-masonry@0.1.0
@@ -68,6 +69,7 @@ reload@1.1.11
 retry@1.0.9
 risul:slick@1.5.5_1
 routepolicy@1.0.12
+rzymek:moment-locale-et@2.14.1
 shell-server@0.2.3
 spacebars@1.0.13
 spacebars-compiler@1.1.0
